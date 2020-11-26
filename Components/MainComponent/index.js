@@ -102,10 +102,13 @@ class MainComponent extends Component {
     let bottomLeft = document.getElementById("bottomLeft");
     let bottomRight = document.getElementById("bottomRight");
 
+    const inputHidden = document.getElementById("hiddenInput");
+
     topLeft.value = "";
     topRight.value = "";
     bottomLeft.value = "";
     bottomRight.value = "";
+    inputHidden.value = "";
 
     this.setState(
       {
@@ -120,14 +123,41 @@ class MainComponent extends Component {
     );
   };
 
+  copyToClipboard = () => {
+    const inputs = document.getElementsByClassName("inputSession");
+    const { top_left, top_right, bottom_left, bottom_right } = this.state;
+    const { unit } = this.spaceVariables;
+
+    const inputHidden = document.getElementById("hiddenInput");
+
+    if (
+      inputs[0].value === "" ||
+      inputs[1].value === "" ||
+      inputs[2].value === "" ||
+      inputs[3].value === ""
+    ) {
+      inputHidden.value = "Por favor, Complete os campos";
+      inputHidden.hidden = false;
+    } else {
+      console.log(inputs[0].value);
+      inputHidden.value = `border-radius: ${top_left + unit} ${top_right +
+        unit} ${bottom_right + unit} ${bottom_left + unit};`;
+
+      inputHidden.hidden = false;
+    }
+  };
+
   render() {
     return (
       <div className="main">
-        <div className="square" id="squareElement" />
+        <div className="square" id="squareElement">
+          <input id="hiddenInput" hidden={true} />
+        </div>
         <div className="inputForm">
           <div className="inputDiv">
             <input
               id="topLeft"
+              className="inputSession"
               type="number"
               onChange={() => this.getInputsValues()}
             />
@@ -136,6 +166,7 @@ class MainComponent extends Component {
             <input
               id="topRight"
               type="number"
+              className="inputSession"
               onChange={() => this.getInputsValues()}
             />
           </div>
@@ -143,6 +174,7 @@ class MainComponent extends Component {
             <input
               id="bottomLeft"
               type="number"
+              className="inputSession"
               onChange={() => this.getInputsValues()}
             />
           </div>
@@ -150,12 +182,13 @@ class MainComponent extends Component {
             <input
               id="bottomRight"
               type="number"
+              className="inputSession"
               onChange={() => this.getInputsValues()}
             />
           </div>
         </div>
         <div className="buttonDiv">
-          <button onClick={() => this.getInputsValues()}>Gerar</button>
+          <button onClick={() => this.copyToClipboard()}>Gerar</button>
           <button onClick={() => this.cleanworkspace()}>Limpar</button>
           <div className="unitButton">
             <button
