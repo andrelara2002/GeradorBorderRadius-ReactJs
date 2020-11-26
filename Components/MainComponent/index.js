@@ -96,27 +96,67 @@ class MainComponent extends Component {
     );
   };
 
+  cleanworkspace = () => {
+    let topLeft = document.getElementById("topLeft");
+    let topRight = document.getElementById("topRight");
+    let bottomLeft = document.getElementById("bottomLeft");
+    let bottomRight = document.getElementById("bottomRight");
+
+    topLeft.value = "";
+    topRight.value = "";
+    bottomLeft.value = "";
+    bottomRight.value = "";
+
+    this.setState(
+      {
+        top_left: 0,
+        top_right: 0,
+        bottom_left: 0,
+        bottom_right: 0
+      },
+      () => {
+        this.generateSquare();
+      }
+    );
+  };
+
   render() {
     return (
       <div className="main">
         <div className="square" id="squareElement" />
         <div className="inputForm">
           <div className="inputDiv">
-            <input id="topLeft" />
+            <input
+              id="topLeft"
+              type="number"
+              onChange={() => this.getInputsValues()}
+            />
           </div>
           <div className="inputDiv">
-            <input id="topRight" />
+            <input
+              id="topRight"
+              type="number"
+              onChange={() => this.getInputsValues()}
+            />
           </div>
           <div className="inputDiv">
-            <input id="bottomLeft" />
+            <input
+              id="bottomLeft"
+              type="number"
+              onChange={() => this.getInputsValues()}
+            />
           </div>
           <div className="inputDiv">
-            <input id="bottomRight" />
+            <input
+              id="bottomRight"
+              type="number"
+              onChange={() => this.getInputsValues()}
+            />
           </div>
         </div>
         <div className="buttonDiv">
           <button onClick={() => this.getInputsValues()}>Gerar</button>
-          <button>Limpar</button>
+          <button onClick={() => this.cleanworkspace()}>Limpar</button>
           <div className="unitButton">
             <button
               onClick={() => {

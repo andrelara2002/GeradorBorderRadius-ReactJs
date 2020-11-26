@@ -29,6 +29,8 @@ body {
   width: 20rem;
   height: 10rem;
   background: var(--background-color);
+
+  transition: 500ms;
 }
 
 .main {
@@ -52,6 +54,9 @@ body {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
+  padding: 0;
+  margin: 0;
+  width: 100%;
 }
 
 .inputDiv {
